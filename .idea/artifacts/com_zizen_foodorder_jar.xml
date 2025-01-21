@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="com.zizen.foodorder:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/com_zizen_foodorder_jar</output-path>
+    <root id="archive" name="com.zizen.foodorder.jar">
+      <element id="module-output" name="com.zizen.foodorder" />
+    </root>
+  </artifact>
+</component>
