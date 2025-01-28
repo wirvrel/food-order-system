@@ -1,0 +1,110 @@
+[
+  {
+    "feedbackText": "Цікава стаття про наукові досягнення в 21 ст. ",
+    "user": {
+      "role": "ADMIN",
+      "password": "$2a$10$4rHBhx9ndXQXMJey0dWYfeKkx4/GEkBHah.5v5GvAaBE3w94mZFO2",
+      "email": "Admin123@gmail.com",
+      "username": "Admin123",
+      "id": "72c9d731-39cf-436d-816e-2852cec0cc18"
+    },
+    "article": {
+      "title": "Наукові досягнення в 21 столітті",
+      "content": "Прориви в генетиці, космічних технологіях та медицині, що змінюють наше розуміння науки.",
+      "category": {
+        "name": "Наука",
+        "id": "223e4567-e89b-12d3-a456-426614174000"
+      },
+      "author": {
+        "role": "ADMIN",
+        "password": "$2a$10$4rHBhx9ndXQXMJey0dWYfeKkx4/GEkBHah.5v5GvAaBE3w94mZFO2",
+        "email": "Admin123@gmail.com",
+        "username": "Admin123",
+        "id": "72c9d731-39cf-436d-816e-2852cec0cc18"
+      },
+      "id": "223e4567-e89b-12d3-a456-426614174010"
+    },
+    "id": "223e4567-e89b-12d3-a456-426614174030"
+  },
+  {
+    "feedbackText": "Дуже корисно для студентів.",
+    "user": {
+      "role": "USER",
+      "password": "$2a$10$7iiwqCDyZKgZycsa4Tk9H.ZqEHY7smncGMYlZf/83WT9OhIJUvFdK",
+      "email": "User1245@gmail.com",
+      "username": "User1245",
+      "id": "00366650-ac88-456b-8c0a-b343276c0691"
+    },
+    "article": {
+      "title": "Історія Стародавнього Риму",
+      "content": "Важливі етапи розвитку Римської імперії та її вплив на Європу.",
+      "category": {
+        "name": "Історія",
+        "id": "223e4567-e89b-12d3-a456-426614174001"
+      },
+      "author": {
+        "role": "USER",
+        "password": "$2a$10$7iiwqCDyZKgZycsa4Tk9H.ZqEHY7smncGMYlZf/83WT9OhIJUvFdK",
+        "email": "User1245@gmail.com",
+        "username": "User1245",
+        "id": "00366650-ac88-456b-8c0a-b343276c0691"
+      },
+      "id": "223e4567-e89b-12d3-a456-426614174011"
+    },
+    "id": "223e4567-e89b-12d3-a456-426614174031"
+  },
+  {
+    "feedbackText": "Чудова стаття. Дуже добре роз\u0027яснено.",
+    "user": {
+      "role": "USER",
+      "password": "$2a$10$uVrADv2zF9UFLiqY/yZPtebFyzTDBmbAZmsfA1D6MydTglGQz7Kie",
+      "email": "User987@gmail.com",
+      "username": "User987",
+      "id": "52362e32-b40b-4f93-bc2d-2e39b67b973f"
+    },
+    "article": {
+      "title": "Мистецтво Ренесансу",
+      "content": "Відродження класичних ідей через роботи великих художників, таких як Леонардо да Вінчі та Мікеланджело.",
+      "category": {
+        "name": "Мистецтво",
+        "id": "223e4567-e89b-12d3-a456-426614174002"
+      },
+      "author": {
+        "role": "USER",
+        "password": "$2a$10$uVrADv2zF9UFLiqY/yZPtebFyzTDBmbAZmsfA1D6MydTglGQz7Kie",
+        "email": "User987@gmail.com",
+        "username": "User987",
+        "id": "52362e32-b40b-4f93-bc2d-2e39b67b973f"
+      },
+      "id": "223e4567-e89b-12d3-a456-426614174012"
+    },
+    "id": "223e4567-e89b-12d3-a456-426614174033"
+  },
+  {
+    "feedbackText": "Ідеальна стаття про екологію.",
+    "user": {
+      "role": "USER",
+      "password": "$2a$10$okq5NJ5QU6TIu2pIrwG7VOfuU6wjsFcGDJAmfHWan3hr.35YyB4e.",
+      "email": "User5432@gmail.com",
+      "username": "User5432",
+      "id": "92d9f2ae-2722-4f90-95b6-70f07c999ac6"
+    },
+    "article": {
+      "title": "Інновації в екології",
+      "content": "Як новітні технології допомагають зберегти навколишнє середовище.",
+      "category": {
+        "name": "Природа",
+        "id": "223e4567-e89b-12d3-a456-426614174004"
+      },
+      "author": {
+        "role": "ADMIN",
+        "password": "$2a$10$4rHBhx9ndXQXMJey0dWYfeKkx4/GEkBHah.5v5GvAaBE3w94mZFO2",
+        "email": "Admin123@gmail.com",
+        "username": "Admin123",
+        "id": "72c9d731-39cf-436d-816e-2852cec0cc18"
+      },
+      "id": "223e4567-e89b-12d3-a456-426614174020"
+    },
+    "id": "223e4567-e89b-12d3-a456-426614174034"
+  }
+]

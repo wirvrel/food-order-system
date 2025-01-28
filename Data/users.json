@@ -1,0 +1,79 @@
+[
+  {
+    "role": "USER",
+    "password": "$2a$10$okq5NJ5QU6TIu2pIrwG7VOfuU6wjsFcGDJAmfHWan3hr.35YyB4e.",
+    "email": "User5432@gmail.com",
+    "username": "User5432",
+    "id": "92d9f2ae-2722-4f90-95b6-70f07c999ac6"
+  },
+  {
+    "role": "ADMIN",
+    "password": "$2a$10$rm8mdKJfH7J0ml2Y5WhA6u1Wc.rzLfNSNE9r6XyOKXvMXhTmL3dtO",
+    "email": "Admin567@gmail.com",
+    "username": "Admin567",
+    "id": "ab6f2f68-118d-4e38-94d4-76e53997b6da"
+  },
+  {
+    "role": "USER",
+    "password": "$2a$10$ZvnDgkQIEdMuVijAa50OpA3xxaFVx9E9thX6M8Gs8mOWr9Mm/yGZ2",
+    "email": "User8456@gmail.com",
+    "username": "User8456",
+    "id": "7b3175f0-3b0e-48ec-8b49-c3fa98c687b0"
+  },
+  {
+    "role": "USER",
+    "password": "$2a$10$2V7wUuRUwYB5mQhRxzYb.5Mgf2ahak20a9B3tRfxREt8HJbTIjV7W",
+    "email": "User9876@gmail.com",
+    "username": "User9876",
+    "id": "82a80f99-6c0d-49a1-93ac-d313dd5e0a24"
+  },
+  {
+    "role": "USER",
+    "password": "$2a$10$p7zAgOqzAV9YnnBnYAWWOeY28JdzsSb7uhmpaIhAeWmgp2Yaah1u2",
+    "email": "User6787@gmail.com",
+    "username": "User6787",
+    "id": "4d628ee1-077e-4091-9ae1-e202c8906fbf"
+  },
+  {
+    "role": "USER",
+    "password": "$2a$10$4pOtB13wYdVUB5SlKH5y5eeBIXeHUGJjwRrZlZYvJXY7D.gYOhTGm",
+    "email": "User6789@gmail.com",
+    "username": "User6789",
+    "id": "b8659d02-9ca2-49d4-bb56-bb194fe41326"
+  },
+  {
+    "role": "ADMIN",
+    "password": "$2a$10$4rHBhx9ndXQXMJey0dWYfeKkx4/GEkBHah.5v5GvAaBE3w94mZFO2",
+    "email": "Admin123@gmail.com",
+    "username": "Admin123",
+    "id": "72c9d731-39cf-436d-816e-2852cec0cc18"
+  },
+  {
+    "role": "USER",
+    "password": "$2a$10$7iiwqCDyZKgZycsa4Tk9H.ZqEHY7smncGMYlZf/83WT9OhIJUvFdK",
+    "email": "User1245@gmail.com",
+    "username": "User1245",
+    "id": "00366650-ac88-456b-8c0a-b343276c0691"
+  },
+  {
+    "role": "USER",
+    "password": "$2a$10$eyZA8nHgHyb2VuJqbZHy0uaYhFeCCU5hGljfkcQn3lK5SxqYxGzNC",
+    "email": "User234@gmail.com",
+    "username": "User234",
+    "id": "a836543f-e189-4669-a89f-b29b2320b94d"
+  },
+  {
+    "role": "USER",
+    "password": "$2a$10$uVrADv2zF9UFLiqY/yZPtebFyzTDBmbAZmsfA1D6MydTglGQz7Kie",
+    "email": "User987@gmail.com",
+    "username": "User987",
+    "id": "52362e32-b40b-4f93-bc2d-2e39b67b973f"
+  },
+  {
+    "role": "USER",
+    "password": "$2a$10$PVAZs.CpzY2hwhBZywt64E.xuV2bp6gHtjyEXMk0rknbG46vN5r/q",
+    "email": "User12345@gmail.com",
+    "username": "User12345",
+    "id": "2c4d0d38-cb33-4e5c-b8c1-e35f865a5c8f"
+  }
+]

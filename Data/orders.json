@@ -1,0 +1,98 @@
+[
+  {
+    "title": "Наукові досягнення в 21 столітті",
+    "content": " Прориви в генетиці, космічних технологіях та медицині, що змінюють наше розуміння науки.",
+    "category": {
+      "name": "Наука",
+      "id": "223e4567-e89b-12d3-a456-426614174000"
+    },
+    "author": {
+      "role": "ADMIN",
+      "password": "$2a$10$4rHBhx9ndXQXMJey0dWYfeKkx4/GEkBHah.5v5GvAaBE3w94mZFO2",
+      "email": "Admin123@gmail.com",
+      "username": "Admin123",
+      "id": "72c9d731-39cf-436d-816e-2852cec0cc18"
+    },
+    "id": "223e4567-e89b-12d3-a456-426614174010"
+  },
+  {
+    "title": "Історія Стародавнього Риму",
+    "content": "Важливі етапи розвитку Римської імперії та її вплив на Європу.",
+    "category": {
+      "name": "Історія",
+      "id": "223e4567-e89b-12d3-a456-426614174001"
+    },
+    "author": {
+      "role": "USER",
+      "password": "$2a$10$7iiwqCDyZKgZycsa4Tk9H.ZqEHY7smncGMYlZf/83WT9OhIJUvFdK",
+      "email": "User1245@gmail.com",
+      "username": "User1245",
+      "id": "00366650-ac88-456b-8c0a-b343276c0691"
+    },
+    "id": "223e4567-e89b-12d3-a456-426614174011"
+  },
+  {
+    "title": "Мистецтво Ренесансу",
+    "content": "Відродження класичних ідей через роботи великих художників, таких як Леонардо да Вінчі та Мікеланджело.",
+    "category": {
+      "name": "Мистецтво",
+      "id": "223e4567-e89b-12d3-a456-426614174002"
+    },
+    "author": {
+      "role": "USER",
+      "password": "$2a$10$uVrADv2zF9UFLiqY/yZPtebFyzTDBmbAZmsfA1D6MydTglGQz7Kie",
+      "email": "User987@gmail.com",
+      "username": "User987",
+      "id": "52362e32-b40b-4f93-bc2d-2e39b67b973f"
+    },
+    "id": "223e4567-e89b-12d3-a456-426614174012"
+  },
+  {
+    "title": "Мистецтво театру",
+    "content": "Розвиток театрального мистецтва від античності до сучасних інновацій.",
+    "category": {
+      "name": "Мистецтво",
+      "id": "223e4567-e89b-12d3-a456-426614174002"
+    },
+    "author": {
+      "role": "USER",
+      "password": "$2a$10$eyZA8nHgHyb2VuJqbZHy0uaYhFeCCU5hGljfkcQn3lK5SxqYxGzNC",
+      "email": "User234@gmail.com",
+      "username": "User234",
+      "id": "a836543f-e189-4669-a89f-b29b2320b94d"
+    },
+    "id": "223e4567-e89b-12d3-a456-426614174015"
+  },
+  {
+    "title": "Географічні відкриття",
+    "content": "Вплив подорожей великих мандрівників на карту світу та наукові знання.",
+    "category": {
+      "name": "Географія",
+      "id": "223e4567-e89b-12d3-a456-426614174006"
+    },
+    "author": {
+      "role": "USER",
+      "password": "$2a$10$ZvnDgkQIEdMuVijAa50OpA3xxaFVx9E9thX6M8Gs8mOWr9Mm/yGZ2",
+      "email": "User8456@gmail.com",
+      "username": "User8456",
+      "id": "7b3175f0-3b0e-48ec-8b49-c3fa98c687b0"
+    },
+    "id": "223e4567-e89b-12d3-a456-426614174016"
+  },
+  {
+    "title": "Чому небо синє?",
+    "content": "Небо виглядає синім, тому що сонячне світло розсіюється в атмосфері.",
+    "category": {
+      "name": "Природа",
+      "id": "223e4567-e89b-12d3-a456-426614174004"
+    },
+    "author": {
+      "role": "ADMIN",
+      "password": "$2a$10$4rHBhx9ndXQXMJey0dWYfeKkx4/GEkBHah.5v5GvAaBE3w94mZFO2",
+      "email": "Admin123@gmail.com",
+      "username": "Admin123",
+      "id": "72c9d731-39cf-436d-816e-2852cec0cc18"
+    },
+    "id": "26366531-4b11-400e-9a65-742d9cd6eede"
+  }
+]
