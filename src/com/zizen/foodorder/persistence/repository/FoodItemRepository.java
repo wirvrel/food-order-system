@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class FoodItemRepository implements GenericRepository<FoodItem> {
+public class FoodItemRepository {
 
     private final List<FoodItem> foodItems;
     private final Path filePath;
@@ -22,41 +22,32 @@ public class FoodItemRepository implements GenericRepository<FoodItem> {
         this.foodItems = loadFoodItems();
     }
 
-    @Override
     public void add(FoodItem entity) {
         foodItems.add(entity);
         saveFoodItems();
     }
 
-    @Override
     public void update(FoodItem entity) {
-        FoodItem existingFoodItem = getById(entity.getId());
-
-        if (existingFoodItem != null) {
-            // Оновлення полів FoodItem
-            existingFoodItem.setName(entity.getName());
-            existingFoodItem.setDescription(entity.getDescription());
-            existingFoodItem.setPrice(entity.getPrice());
-            existingFoodItem.setCategory(entity.getCategory());
-
-            saveFoodItems();
-        } else {
-            System.out.println("Елемент з таким ID не знайдено.");
+        for (int i = 0; i < foodItems.size(); i++) {
+            if (foodItems.get(i).getId().equals(entity.getId())) {
+                foodItems.set(i, entity); // Замінюємо весь об'єкт
+                saveFoodItems();
+                return;
+            }
         }
+        System.out.println("Елемент з таким ID не знайдений.");
     }
 
-    @Override
+
     public void delete(FoodItem entity) {
         foodItems.removeIf(foodItem -> foodItem.getId().equals(entity.getId()));
         saveFoodItems();
     }
 
-    @Override
     public List<FoodItem> getAllObjects() {
         return new ArrayList<>(foodItems);
     }
 
-    @Override
     public FoodItem getById(UUID id) {
         return foodItems.stream()
             .filter(foodItem -> foodItem.getId().equals(id))
@@ -64,7 +55,6 @@ public class FoodItemRepository implements GenericRepository<FoodItem> {
             .orElse(null);
     }
 
-    @Override
     public List<FoodItem> find(String value) {
         return foodItems.stream()
             .filter(foodItem -> foodItem.getName().toLowerCase().contains(value.toLowerCase()))

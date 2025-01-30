@@ -15,13 +15,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void addOrder(Order order) {
-        orderRepository.add(order); // Додаємо замовлення до репозиторію
+    public List<Order> getOrdersByUser(String username) {
+        return orderRepository.getAllObjects().stream()
+            .filter(order -> order.getUser().getUsername().equalsIgnoreCase(username))
+            .toList();
     }
 
     @Override
-    public void updateOrder(Order order) {
-        orderRepository.update(order); // Оновлюємо замовлення у репозиторії
+    public void addOrder(Order order) {
+        orderRepository.add(order); // Додаємо замовлення до репозиторію
     }
 
     @Override

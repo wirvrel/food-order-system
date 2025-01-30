@@ -1,9 +1,9 @@
 package com.zizen.foodorder.presentation.menu;
 
 public enum InitialMenu {
-    SIGN_IN("Увійти"),
-    SIGN_UP("Зареєструватися"),
-    EXIT("Вийти");
+    SIGN_IN("🔑 Увійти"),
+    SIGN_UP("📝 Зареєструватися"),
+    EXIT("🚪 Вийти");
 
     private final String name;
 
@@ -12,6 +12,11 @@ public enum InitialMenu {
     }
 
     public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
         return name;
     }
 }

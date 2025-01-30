@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class CategoryRepository implements GenericRepository<Category> {
+public class CategoryRepository {
 
     private final List<Category> categories;
     private final Path filePath;
@@ -22,41 +22,31 @@ public class CategoryRepository implements GenericRepository<Category> {
         this.categories = loadCategories();
     }
 
-    @Override
     public void add(Category entity) {
         categories.add(entity);
         saveCategories();
     }
 
-    @Override
     public void update(Category entity) {
-        // Знаходимо категорію за ID
-        Category existingCategory = getById(entity.getId());
-
-        // Якщо категорія знайдена, оновлюємо її
-        if (existingCategory != null) {
-            // Оновлюємо назву категорії (або інші поля)
-            existingCategory.setName(entity.getName());
-            // Зберігаємо зміни в файл
-            saveCategories();
-        } else {
-            System.out.println("Категорія з таким ID не знайдена.");
+        for (int i = 0; i < categories.size(); i++) {
+            if (categories.get(i).getId().equals(entity.getId())) {
+                categories.set(i, entity); // Замінюємо весь об'єкт
+                saveCategories();
+                return;
+            }
         }
+        System.out.println("Категорія з таким ID не знайдена.");
     }
 
-
-    @Override
     public void delete(Category entity) {
         categories.removeIf(category -> category.getId().equals(entity.getId()));
         saveCategories();
     }
 
-    @Override
     public List<Category> getAllObjects() {
         return new ArrayList<>(categories);
     }
 
-    @Override
     public Category getById(UUID id) {
         return categories.stream()
             .filter(category -> category.getId().equals(id))
@@ -64,7 +54,6 @@ public class CategoryRepository implements GenericRepository<Category> {
             .orElse(null);
     }
 
-    @Override
     public List<Category> find(String value) {
         return categories.stream()
             .filter(category -> category.getName().toLowerCase().contains(value.toLowerCase()))

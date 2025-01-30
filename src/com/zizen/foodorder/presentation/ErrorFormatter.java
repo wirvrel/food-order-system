@@ -8,9 +8,10 @@ public class ErrorFormatter {
         String longestError = errorMessages.stream()
             .max(java.util.Comparator.comparingInt(String::length)).orElse("");
         int boxWidth = longestError.length() + 4;
-        String boxLine = "═".repeat(boxWidth);
+        String boxLine = "•".repeat(boxWidth);  // Використовуємо інші символи для обрамлення
 
-        System.out.println(Ansi.ansi().fg(Ansi.Color.RED).a("╔" + boxLine + "╗").reset());
+        System.out.println(Ansi.ansi().fg(Ansi.Color.RED).a("┌" + boxLine + "┐")
+            .reset());  // Заміна на символ "┌"
 
         for (String errorMessage : errorMessages) {
             int padding = boxWidth - errorMessage.length() - 2;
@@ -20,10 +21,12 @@ public class ErrorFormatter {
             String paddingSpaces = " ".repeat(leftPadding);
             String rightPaddingSpaces = " ".repeat(rightPadding);
 
-            System.out.println(Ansi.ansi().fg(Ansi.Color.RED)
-                .a("║ " + paddingSpaces + errorMessage + rightPaddingSpaces + " ║").reset());
+            System.out.println(Ansi.ansi().fg(Ansi.Color.RED)  // Колір помилок змінено на червоний
+                .a("│ " + paddingSpaces + errorMessage + rightPaddingSpaces + " │")
+                .reset());  // Заміна на символ "│"
         }
 
-        System.out.println(Ansi.ansi().fg(Ansi.Color.RED).a("╚" + boxLine + "╝").reset());
+        System.out.println(Ansi.ansi().fg(Ansi.Color.RED).a("└" + boxLine + "┘")
+            .reset());  // Заміна на символ "└"
     }
 }

@@ -70,32 +70,47 @@ public class CategoryMenuHandler {
         }
     }
 
-
-    // Оновлення категорії
     public void updateCategory() {
         viewAllCategories();
+
+        UUID id;
+        Category category;
+
         while (true) {
             System.out.print("Введіть ID категорії: ");
-            UUID id = UUID.fromString(scanner.nextLine());
-            Category category = categoryService.getCategoryById(id);
-            if (category != null) {
-                System.out.print("Введіть нову назву категорії: ");
-                category.setName(scanner.nextLine());
-                try {
-                    categoryService.updateCategory(category);
-                    System.out.println("Категорію оновлено успішно.");
-                    break; // Вихід із циклу, оскільки відгук успішно створено
+            try {
+                id = UUID.fromString(scanner.nextLine());
+            } catch (IllegalArgumentException e) {
+                System.out.println("❌ Некоректний формат ID. Спробуйте ще раз.");
+                continue;
+            }
 
-                } catch (EntityArgumentException e) {
-                    // Виводимо помилки
-                    ErrorFormatter.printErrorsInBox(new ArrayList<>(e.getErrors()));
-                    System.out.println("Спробуйте ще раз.");
-                }
-            } else {
-                System.out.println("Категорію не знайдено.");
+            category = categoryService.getCategoryById(id);
+            if (category == null) {
+                System.out.println("❌ Категорію не знайдено.");
+                continue;
+            }
+
+            break;
+        }
+
+        while (true) {
+            System.out.print("Введіть нову назву категорії: ");
+            String newName = scanner.nextLine();
+
+            try {
+                Category updatedCategory = new Category(category.getId(), newName);
+                categoryService.updateCategory(updatedCategory);
+                System.out.println("✅ Категорію оновлено успішно.");
+                break;
+            } catch (EntityArgumentException e) {
+                System.out.println("❌ Введено некоректні дані:");
+                ErrorFormatter.printErrorsInBox(new ArrayList<>(e.getErrors()));
+                System.out.println("Спробуйте ще раз.");
             }
         }
     }
+
 
     // Видалення категорії
     public void deleteCategory() {

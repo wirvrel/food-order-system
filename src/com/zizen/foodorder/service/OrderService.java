@@ -9,14 +9,13 @@ public interface OrderService {
     // Додає нове замовлення
     void addOrder(Order order);
 
-    // Оновлює існуюче замовлення
-    void updateOrder(Order order);
-
     // Видаляє замовлення за ID
     void deleteOrder(UUID id);
 
     // Отримує всі замовлення
     List<Order> getAllOrders();
+
+    List<Order> getOrdersByUser(String username);
 
     // Пошук замовлень за ключовим словом
     List<Order> searchOrders(String keyword);

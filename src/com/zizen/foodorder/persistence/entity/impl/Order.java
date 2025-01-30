@@ -51,13 +51,6 @@ public class Order extends Entity implements Comparable<Order> {
         return totalPrice;
     }
 
-    // Додаємо setTotalPrice
-    public void setTotalPrice(double totalPrice) {
-        if (totalPrice < 0) {
-            errors.add(ErrorTemplates.REQUIRED.getTemplate().formatted("ціни"));
-        }
-        this.totalPrice = totalPrice;
-    }
 
     private void calculateTotalPrice() {
         this.totalPrice = items.stream().mapToDouble(FoodItem::getPrice).sum();

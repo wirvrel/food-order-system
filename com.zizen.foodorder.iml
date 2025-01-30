@@ -7,5 +7,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="bcrypt-0.3" level="project" />
+    <orderEntry type="library" name="fliptables-1.1.1" level="project" />
+    <orderEntry type="library" name="gson-2.11.0" level="project" />
+    <orderEntry type="library" name="jansi-1.11" level="project" />
   </component>
 </module>

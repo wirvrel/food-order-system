@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class OrderRepository implements GenericRepository<Order> {
+public class OrderRepository {
 
     private final List<Order> orders;
     private final Path filePath;
@@ -22,40 +22,20 @@ public class OrderRepository implements GenericRepository<Order> {
         this.orders = loadOrders();
     }
 
-    @Override
     public void add(Order entity) {
         orders.add(entity);
         saveOrders();
     }
 
-    @Override
-    public void update(Order entity) {
-        // Знаходимо замовлення за ID
-        Order existingOrder = getById(entity.getId());
-
-        // Якщо замовлення знайдено, оновлюємо його
-        if (existingOrder != null) {
-            existingOrder.setUser(entity.getUser());
-            existingOrder.setItems(entity.getItems());
-            existingOrder.setTotalPrice(entity.getTotalPrice());
-            saveOrders();
-        } else {
-            System.out.println("Замовлення з таким ID не знайдено.");
-        }
-    }
-
-    @Override
     public void delete(Order entity) {
         orders.removeIf(order -> order.getId().equals(entity.getId()));
         saveOrders();
     }
 
-    @Override
     public List<Order> getAllObjects() {
         return new ArrayList<>(orders);
     }
 
-    @Override
     public Order getById(UUID id) {
         return orders.stream()
             .filter(order -> order.getId().equals(id))
@@ -63,7 +43,6 @@ public class OrderRepository implements GenericRepository<Order> {
             .orElse(null);
     }
 
-    @Override
     public List<Order> find(String value) {
         return orders.stream()
             .filter(

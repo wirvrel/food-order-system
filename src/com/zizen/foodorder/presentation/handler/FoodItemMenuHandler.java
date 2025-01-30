@@ -7,6 +7,9 @@ import com.zizen.foodorder.persistence.exception.EntityArgumentException;
 import com.zizen.foodorder.presentation.ErrorFormatter;
 import com.zizen.foodorder.service.CategoryService;
 import com.zizen.foodorder.service.FoodItemService;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -56,12 +59,21 @@ public class FoodItemMenuHandler {
 
     public void createFoodItem() {
         while (true) {
+            List<String> errors = new ArrayList<>(); // Список для збору всіх помилок
+
             System.out.print("Введіть назву продукту: ");
             String name = scanner.nextLine();
+
             System.out.print("Введіть опис продукту: ");
             String description = scanner.nextLine();
+
             System.out.print("Введіть ціну продукту: ");
-            double price = Double.parseDouble(scanner.nextLine());
+            double price = 0;
+            try {
+                price = Double.parseDouble(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                errors.add("Некоректний формат ціни. Введіть число більше 0.");
+            }
 
             // Використовуємо CategoryMenuHandler для вибору категорії
             categoryMenuHandler.viewAllCategories();
@@ -69,95 +81,101 @@ public class FoodItemMenuHandler {
             Category category = null;
             try {
                 UUID categoryId = UUID.fromString(scanner.nextLine());
-                category = categoryService.getCategoryById(categoryId); // Отримуємо категорію
+                category = categoryService.getCategoryById(categoryId);
+                if (category == null) {
+                    errors.add("❌ Категорія з таким ID не знайдена.");
+                }
             } catch (IllegalArgumentException e) {
-                System.out.println("Некоректний формат ID.");
+                errors.add("Некоректний формат ID категорії.");
             }
-
-            if (category == null) {
-                System.out.println("Категорія не знайдена. Спробуйте ще раз.");
-                continue;
-            }
-
-            try {
-                FoodItem foodItem = new FoodItem(UUID.randomUUID(), name, description, price,
-                    category);
-                foodItemService.addFoodItem(foodItem);
-                System.out.println("Продукт створено успішно.");
-                break;
-
-            } catch (EntityArgumentException e) {
-                ErrorFormatter.printErrorsInBox(new ArrayList<>(e.getErrors()));
+            if (!errors.isEmpty()) {
+                // Відображаємо всі помилки за один раз
+                ErrorFormatter.printErrorsInBox(errors);
                 System.out.println("Спробуйте ще раз.");
+                continue; // Повторний запит на введення
             }
+
+            // Якщо всі дані валідні – додаємо страву
+            FoodItem foodItem = new FoodItem(UUID.randomUUID(), name, description, price, category);
+            foodItemService.addFoodItem(foodItem);
+            System.out.println("✅ Продукт створено успішно.");
+            break; // Вихід з циклу після успішного створення
         }
     }
 
     public void updateFoodItem() {
         viewAllFoodItems();
 
+        UUID id;
+        FoodItem foodItem;
+
+        // Вибір продукту для оновлення
         while (true) {
-            System.out.print("Введіть ID продукту для оновлення: ");
-            UUID id;
+            System.out.print("Введіть ID продукту: ");
             try {
                 id = UUID.fromString(scanner.nextLine());
             } catch (IllegalArgumentException e) {
-                System.out.println("Некоректний формат ID. Спробуйте ще раз.");
+                System.out.println("❌ Некоректний формат ID. Спробуйте ще раз.");
                 continue;
             }
 
-            FoodItem foodItem = foodItemService.getFoodItemById(id);
-
+            foodItem = foodItemService.getFoodItemById(id);
             if (foodItem == null) {
-                System.out.println("Продукт з таким ID не знайдено.");
+                System.out.println("❌ Продукт не знайдено.");
                 continue;
             }
 
-            System.out.print("Введіть нову назву продукту (поточна: " + foodItem.getName() + "): ");
+            break;
+        }
+
+        // Введення нових даних з валідацією
+        while (true) {
+            System.out.print("Введіть нову назву продукту: ");
             String newName = scanner.nextLine();
-            System.out.print(
-                "Введіть новий опис продукту (поточний: " + foodItem.getDescription() + "): ");
+
+            System.out.print("Введіть новий опис продукту: ");
             String newDescription = scanner.nextLine();
-            System.out.print("Введіть нову ціну продукту (поточна: " + foodItem.getPrice() + "): ");
+
+            System.out.print("Введіть нову ціну продукту: ");
             double newPrice;
             try {
                 newPrice = Double.parseDouble(scanner.nextLine());
             } catch (NumberFormatException e) {
-                System.out.println("Ціна повинна бути числом. Спробуйте ще раз.");
+                System.out.println("❌ Некоректний формат ціни. Введіть число більше 0.");
                 continue;
             }
 
             categoryMenuHandler.viewAllCategories();
-            System.out.print("Введіть ID нової категорії (поточна: " +
-                (foodItem.getCategory() != null ? foodItem.getCategory().getName()
-                    : "Без категорії") + "): ");
-            Category newCategory = null;
+            System.out.print("Введіть нове ID категорії: ");
+            UUID newCategoryId;
+            Category newCategory;
             try {
-                UUID categoryId = UUID.fromString(scanner.nextLine());
-                newCategory = categoryService.getCategoryById(categoryId);
+                newCategoryId = UUID.fromString(scanner.nextLine());
+                newCategory = categoryService.getCategoryById(newCategoryId);
+                if (newCategory == null) {
+                    System.out.println("❌ Категорію не знайдено.");
+                    continue;
+                }
             } catch (IllegalArgumentException e) {
-                System.out.println("Некоректний формат ID.");
-            }
-
-            if (newCategory == null) {
-                System.out.println("Категорія не знайдена. Спробуйте ще раз.");
+                System.out.println("❌ Некоректний формат ID категорії.");
                 continue;
             }
 
+            // Створення нового об'єкта з валідацією
             try {
-                foodItem.setName(newName);
-                foodItem.setDescription(newDescription);
-                foodItem.setPrice(newPrice);
-                foodItem.setCategory(newCategory);
-                foodItemService.updateFoodItem(foodItem);
-                System.out.println("Продукт оновлено успішно.");
+                FoodItem updatedFoodItem = new FoodItem(foodItem.getId(), newName, newDescription,
+                    newPrice, newCategory);
+                foodItemService.updateFoodItem(updatedFoodItem);
+                System.out.println("✅ Продукт оновлено успішно.");
                 break;
             } catch (EntityArgumentException e) {
+                System.out.println("❌ Введено некоректні дані:");
                 ErrorFormatter.printErrorsInBox(new ArrayList<>(e.getErrors()));
                 System.out.println("Спробуйте ще раз.");
             }
         }
     }
+
 
     public void deleteFoodItem() {
         viewAllFoodItems();
@@ -210,5 +228,65 @@ public class FoodItemMenuHandler {
         System.out.println(FlipTable.of(headers, data));
     }
 
+    public void exportMenuToCSV() {
+        // Отримуємо список всіх страв
+        List<FoodItem> foodItems = foodItemService.getAllFoodItems();
+
+        // Перевірка на порожнє меню
+        if (foodItems.isEmpty()) {
+            System.out.println("❌ Меню порожнє, неможливо здійснити експорт.");
+            return;
+        }
+
+        System.out.print(
+            "Введіть шлях до файлу (наприклад: D:\\food_menu.csv) або натисніть Enter для використання стандартного (food_menu.csv): ");
+        String filePath = scanner.nextLine().trim();
+
+        // Якщо шлях не введений, використовуємо стандартний
+        if (filePath.isEmpty()) {
+            filePath = "food_menu.csv";
+        }
+
+        File file = new File(filePath);
+
+        // Перевіряємо, чи існує директорія для файлу
+        File parentDir = file.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            if (!parentDir.mkdirs()) {
+                System.out.println("❌ Помилка при створенні директорії для файлу.");
+                return;
+            }
+        }
+
+        // Запис у CSV-файл
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write('\uFEFF');
+            // Запис заголовків
+            writer.write("ID,Назва,Опис,Ціна,Категорія\n");
+
+            // Запис кожної страви
+            for (FoodItem foodItem : foodItems) {
+                writer.write(String.format("%s,%s,%s,%.2f,%s\n",
+                    foodItem.getId().toString(),
+                    escapeCsvValue(foodItem.getName()),
+                    escapeCsvValue(foodItem.getDescription()),
+                    foodItem.getPrice(),
+                    foodItem.getCategory() != null ? escapeCsvValue(
+                        foodItem.getCategory().getName()) : "Без категорії"
+                ));
+            }
+
+            System.out.println("✅ Меню успішно експортовано у файл");
+        } catch (IOException e) {
+            System.out.println("❌ Помилка при експорті меню: " + e.getMessage());
+        }
+    }
+
+    private String escapeCsvValue(String value) {
+        if (value.contains(",") || value.contains("\"") || value.contains("\n")) {
+            return "\"" + value.replace("\"", "\"\"") + "\"";
+        }
+        return value;
+    }
 
 }

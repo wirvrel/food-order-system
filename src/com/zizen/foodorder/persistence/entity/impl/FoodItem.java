@@ -14,15 +14,10 @@ public class FoodItem extends Entity implements Comparable<FoodItem> {
 
     public FoodItem(UUID id, String name, String description, double price, Category category) {
         super(id);
-
         setName(name);
         setDescription(description);
         setPrice(price);
         setCategory(category);
-
-        if (!errors.isEmpty()) {
-            throw new EntityArgumentException(errors);
-        }
     }
 
     public String getName() {
@@ -30,13 +25,20 @@ public class FoodItem extends Entity implements Comparable<FoodItem> {
     }
 
     public void setName(String name) {
-        final String templateName = "назви страви";
+        errors.clear(); // Очищаємо попередні помилки
 
-        if (name.isBlank()) {
-            errors.add(ErrorTemplates.REQUIRED.getTemplate().formatted(templateName));
+        if (name == null || name.isBlank()) {
+            errors.add(ErrorTemplates.REQUIRED.getTemplate().formatted("назви страви"));
         }
-        if (name.length() > 50) {
-            errors.add(ErrorTemplates.MAX_LENGTH.getTemplate().formatted(templateName, 50));
+        if (name != null && name.length() < 3) {
+            errors.add(ErrorTemplates.MIN_LENGTH.getTemplate().formatted("назви страви", 3));
+        }
+        if (name != null && name.length() > 50) {
+            errors.add(ErrorTemplates.MAX_LENGTH.getTemplate().formatted("назви страви", 50));
+        }
+
+        if (!errors.isEmpty()) {
+            throw new EntityArgumentException(errors);
         }
 
         this.name = name;
@@ -47,13 +49,17 @@ public class FoodItem extends Entity implements Comparable<FoodItem> {
     }
 
     public void setDescription(String description) {
-        final String templateName = "опису страви";
+        errors.clear();
 
-        if (description.isBlank()) {
-            errors.add(ErrorTemplates.REQUIRED.getTemplate().formatted(templateName));
+        if (description == null || description.isBlank()) {
+            errors.add(ErrorTemplates.REQUIRED.getTemplate().formatted("опису страви"));
         }
-        if (description.length() > 200) {
-            errors.add(ErrorTemplates.MAX_LENGTH.getTemplate().formatted(templateName, 200));
+        if (description != null && description.length() > 200) {
+            errors.add(ErrorTemplates.MAX_LENGTH.getTemplate().formatted("опису страви", 200));
+        }
+
+        if (!errors.isEmpty()) {
+            throw new EntityArgumentException(errors);
         }
 
         this.description = description;
@@ -64,10 +70,14 @@ public class FoodItem extends Entity implements Comparable<FoodItem> {
     }
 
     public void setPrice(double price) {
-        final String templateName = "ціни";
+        errors.clear();
 
         if (price <= 0) {
-            errors.add("Поле %s має бути більше нуля.".formatted(templateName));
+            errors.add("Поле ціни має бути більше нуля.");
+        }
+
+        if (!errors.isEmpty()) {
+            throw new EntityArgumentException(errors);
         }
 
         this.price = price;
@@ -78,11 +88,22 @@ public class FoodItem extends Entity implements Comparable<FoodItem> {
     }
 
     public void setCategory(Category category) {
+        errors.clear();
+
         if (category == null) {
             errors.add(ErrorTemplates.REQUIRED.getTemplate().formatted("категорії"));
         }
 
+        if (!errors.isEmpty()) {
+            throw new EntityArgumentException(errors);
+        }
+
         this.category = category;
+    }
+
+    @Override
+    public int compareTo(FoodItem o) {
+        return this.name.compareTo(o.name);
     }
 
     @Override
@@ -94,10 +115,5 @@ public class FoodItem extends Entity implements Comparable<FoodItem> {
             ", category=" + category +
             ", id=" + id +
             '}';
-    }
-
-    @Override
-    public int compareTo(FoodItem o) {
-        return this.name.compareTo(o.name);
     }
 }

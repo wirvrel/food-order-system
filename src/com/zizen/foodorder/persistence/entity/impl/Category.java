@@ -11,11 +11,7 @@ public class Category extends Entity implements Comparable<Category> {
 
     public Category(UUID id, String name) {
         super(id);
-        this.name = validatedName(name);
-
-        if (this.isValid()) {
-            throw new EntityArgumentException(errors);
-        }
+        setName(name); // Використовуємо сеттер для перевірки одразу при створенні
     }
 
     public String getName() {
@@ -23,22 +19,28 @@ public class Category extends Entity implements Comparable<Category> {
     }
 
     public void setName(String name) {
-        this.name = validatedName(name);
-    }
-
-    private String validatedName(String name) {
-        final String templateName = "назви категорії";
+        errors.clear(); // Очищаємо попередні помилки
 
         if (name == null || name.isBlank()) {
-            errors.add(ErrorTemplates.REQUIRED.getTemplate().formatted(templateName));
+            errors.add(ErrorTemplates.REQUIRED.getTemplate().formatted("назви категорії"));
         }
-        if (name.length() < 3) {
-            errors.add(ErrorTemplates.MIN_LENGTH.getTemplate().formatted(templateName, 3));
+        if (name != null && name.length() < 3) {
+            errors.add(ErrorTemplates.MIN_LENGTH.getTemplate().formatted("назви категорії", 3));
         }
-        if (name.length() > 100) {
-            errors.add(ErrorTemplates.MAX_LENGTH.getTemplate().formatted(templateName, 100));
+        if (name != null && name.length() > 100) {
+            errors.add(ErrorTemplates.MAX_LENGTH.getTemplate().formatted("назви категорії", 100));
         }
-        return name;
+
+        if (!errors.isEmpty()) {
+            throw new EntityArgumentException(errors); // Викидаємо виняток, якщо є помилки
+        }
+
+        this.name = name; // Якщо помилок немає – оновлюємо значення
+    }
+
+    @Override
+    public int compareTo(Category o) {
+        return this.name.compareTo(o.name);
     }
 
     @Override
@@ -47,10 +49,5 @@ public class Category extends Entity implements Comparable<Category> {
             "name='" + name + '\'' +
             ", id=" + id +
             '}';
-    }
-
-    @Override
-    public int compareTo(Category o) {
-        return this.name.compareTo(o.name);
     }
 }

@@ -19,10 +19,6 @@ public abstract class Entity {
         return id;
     }
 
-    public boolean isValid() {
-        return !errors.isEmpty();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
